@@ -12,3 +12,13 @@ services:
       - "/dev/bus/usb"
     cap_add:
       - SYS_NICE
+
+  flightradar24:
+    build: ./flightradar24
+    restart: always
+    environment:
+      - "FR24FEED_KEY="
+    ports:
+      - "8754:8754/tcp"
+    depends_on:
+      - dump1090

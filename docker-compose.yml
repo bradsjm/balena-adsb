@@ -74,3 +74,10 @@ services:
       - MLAT_CLIENT_USER=XXXX
     depends_on:
       - dump1090
+
+  adsbhub:
+    build: ./adsbhub
+    container_name: 'adsbhub'
+    restart: unless-stopped
+    depends_on:
+      - dump1090

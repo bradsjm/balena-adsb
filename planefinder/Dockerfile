@@ -9,7 +9,7 @@ ARG PFCLIENT_VERSION=4.1.1
 # With the changelog @ https://planefinder.net/sharing/client_changelog
 RUN install_packages curl ca-certificates iputils-ping libc-bin libc-dbg
 
-RUN curl -Ls --output pfclient.tar.gz "http://client.planefinder.net/pfclient_${PFCLIENT_VERSION}_armhf.tar.gz" | tar -xzC /usr/local/bin pfclient
+RUN curl -Ls "http://client.planefinder.net/pfclient_${PFCLIENT_VERSION}_armhf.tar.gz" | tar -xzC /usr/local/bin pfclient
 
 COPY pfclient-runner.sh /usr/local/bin/pfclient-runner
 COPY pfclient-config.json /etc/pfclient-config.json

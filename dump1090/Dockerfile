@@ -8,8 +8,6 @@ ARG DUMP1090_VERSION=master
 RUN echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories && \
     echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
 
-RUN [ "cross-build-start" ]
-
 RUN install_packages \
     tini \
     librtlsdr@testing \
@@ -26,8 +24,6 @@ RUN curl -L --output "dump1090-fa.tar.gz" "https://codeload.github.com/flightawa
 RUN mkdir dump1090 && cd dump1090 && tar -xvf ../dump1090-fa.tar.gz --strip-components=1
 RUN make BLADERF=no DUMP1090_VERSION="${DUMP1090_VERSION}"
 RUN make BLADERF=no test
-
-RUN [ "cross-build-end" ]
 
 # Final Image
 FROM ${IMAGE}:run

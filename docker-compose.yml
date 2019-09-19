@@ -39,3 +39,15 @@ services:
       - 'XXXX'
     depends_on:
       - dump1090
+
+  planefinder:
+    build: ./planefinder
+    restart: unless-stopped
+    ports:
+      - "30053:30053/tcp"
+    environment:
+      - PLANEFINDER_SHARECODE=XXXX
+      - PLANEFINDER_LATITUDE=XXXX
+      - PLANEFINDER_LONGITUDE=XXXX
+    depends_on:
+      - dump1090

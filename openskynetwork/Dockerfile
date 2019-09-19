@@ -5,7 +5,7 @@ FROM ${IMAGE}:run
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-    dumb-init netbase gnupg2 ca-certificates apt-transport-https && \
+    dumb-init netbase gnupg2 ca-certificates apt-transport-https wget && \
     wget -qO - https://opensky-network.org/files/firmware/opensky.gpg.pub | apt-key add - && \
     echo 'deb https://opensky-network.org/repos/debian opensky custom' > /etc/apt/sources.list.d/opensky.list && \
     apt-get update -y && \

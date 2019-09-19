@@ -20,9 +20,10 @@ RUN install_packages \
     ncurses-dev \
     libc-dev librtlsdr-dev@testing libusb-dev
 
-RUN curl -Ls --output "dump1090-fa.tar.gz" "https://codeload.github.com/flightaware/dump1090/tar.gz/${DUMP1090_VERSION}" && \
-    tar -xvf ../dump1090-fa.tar.gz && \
-    cd dump1090-${DUMP1090_VERSION} && \
+RUN mkdir /build && \
+    cd /build && \
+    curl -Ls --output "dump1090-fa.tar.gz" "https://codeload.github.com/flightaware/dump1090/tar.gz/${DUMP1090_VERSION}" && \
+    tar -xvf "dump1090-fa.tar.gz" --strip-components=1 && \
     make BLADERF=no DUMP1090_VERSION="${DUMP1090_VERSION}" && \
     make BLADERF=no test
 
@@ -38,7 +39,7 @@ RUN install_packages \
     libusb \
     ncurses-libs
 
-COPY --from=build /dump1090/dump1090 /usr/local/bin/dump1090
+COPY --from=build /build/dump1090 /usr/local/bin/dump1090
 
 # Raw output
 EXPOSE 30002/tcp

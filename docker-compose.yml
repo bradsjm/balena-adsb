@@ -51,3 +51,13 @@ services:
       - PLANEFINDER_LONGITUDE=XXXX
     depends_on:
       - dump1090
+
+  adsbexchange:
+    build: ./adsbexchange
+    restart: unless-stopped
+    environment:
+      - DUMP1090_SERVER=dump1090
+      - DUMP1090_PORT=30005
+      - ADSBEXCHANGE_PORT=30005
+    depends_on:
+      - dump1090

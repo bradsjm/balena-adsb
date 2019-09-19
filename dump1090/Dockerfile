@@ -48,4 +48,5 @@ EXPOSE 30003/tcp
 # Beast output
 EXPOSE 30005/tcp
 
+# Entrypoint
 ENTRYPOINT ["tini", "--", "nice", "-n", "-5", "dump1090", "--net", "--net-bind-address", "0.0.0.0", "--debug", "n", "--mlat", "--net-heartbeat", "5", "--quiet", "--stats-every", "60"]

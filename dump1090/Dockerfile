@@ -21,7 +21,7 @@ RUN install_packages \
     libc-dev librtlsdr-dev@testing libusb-dev
 
 RUN curl -Ls --output "dump1090-fa.tar.gz" "https://codeload.github.com/flightaware/dump1090/tar.gz/${DUMP1090_VERSION}"
-RUN tar -xvf ../dump1090-fa.tar.gz --strip-components=1 && cd dump1090-${DUMP1090_VERSION}
+RUN tar -xvf ../dump1090-fa.tar.gz && cd dump1090-${DUMP1090_VERSION}
 RUN make BLADERF=no DUMP1090_VERSION="${DUMP1090_VERSION}"
 RUN make BLADERF=no test
 

@@ -97,3 +97,16 @@ services:
       - DUMP1090_PORT=30005
     depends_on:
       - dump1090
+
+  flightaware:
+    build: ./flightaware
+    restart: unless-stopped
+    ports:
+      - "30105:30105/tcp"
+    environment:
+      - FLIGHTAWARE_USERNAME=XXXX
+      - FLIGHTAWARE_PASSWORD=XXXX
+      - FLIGHTAWARE_FEEDER_ID=XXXX
+      - FLIGHTAWARE_GPS_HOST=
+    depends_on:
+      - dump1090

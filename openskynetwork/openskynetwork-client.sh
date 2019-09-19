@@ -1,8 +1,8 @@
 #!/bin/sh
 set -x
-echo "opensky-feeder openskyd/latitude string ${OPENSKY_LATITUDE}" | debconf-set-selections
-echo "opensky-feeder openskyd/longitude string ${OPENSKY_LONGITUDE}" | debconf-set-selections
-echo "opensky-feeder openskyd/altitude string ${OPENSKY_ALTITUDE}" | debconf-set-selections
+echo "opensky-feeder openskyd/latitude string ${LATITUDE}" | debconf-set-selections
+echo "opensky-feeder openskyd/longitude string ${LONGITUDE}" | debconf-set-selections
+echo "opensky-feeder openskyd/altitude string ${ALTITUDE}" | debconf-set-selections
 echo "opensky-feeder openskyd/username string ${OPENSKY_USER}" | debconf-set-selections
 echo "opensky-feeder openskyd/serial string ${OPENSKY_SERIAL}" | debconf-set-selections
 echo "opensky-feeder openskyd/host string ${DUMP1090_HOST}" | debconf-set-selections

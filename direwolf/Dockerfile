@@ -7,7 +7,7 @@ FROM ${IMAGE}:build as build
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8
 
-RUN echo "@testing ${ALPINE_MIRROR}/edge/testing" >> /etc/apk/repositories && \
+RUN echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
     install_packages \
     tini \
     rtl-sdr@testing \
@@ -37,7 +37,7 @@ FROM ${IMAGE}:run
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8
 
-RUN echo "@testing ${ALPINE_MIRROR}/edge/testing" >> /etc/apk/repositories && \
+RUN echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
     install_packages \
     tini \
     rtl-sdr@testing \
@@ -45,8 +45,8 @@ RUN echo "@testing ${ALPINE_MIRROR}/edge/testing" >> /etc/apk/repositories && \
     gpsd \
     alsa-lib
 
-COPY --from=buil /target/ /usr/local/
-COPY --from=buil /etc/udev/rules.d/99-direwolf-cmedia.rules /etc/udev/rules.d/99-direwolf-cmedia.rules
+COPY --from=build /target/ /usr/local/
+COPY --from=build /etc/udev/rules.d/99-direwolf-cmedia.rules /etc/udev/rules.d/99-direwolf-cmedia.rules
 
 ENV MYCALL n0call \
     IGSERVER noam.aprs2.net \

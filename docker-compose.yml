@@ -110,3 +110,18 @@ services:
       - FLIGHTAWARE_GPS_HOST=
     depends_on:
       - dump1090
+
+  radarbox24:
+    build: ./radarbox24
+    restart: unless-stopped
+    environment:
+      - DUMP1090_HOST=dump1090
+      - DUMP1090_PORT=30005
+      - DUMP1090_PROTOCOL=beast
+      - RADARBOX24_KEY=XXXX
+    depends_on:
+      - dump1090
+
+  direwolf:
+    build: ./direwolf
+    restart: unless-stopped

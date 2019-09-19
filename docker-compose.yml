@@ -61,3 +61,16 @@ services:
       - ADSBEXCHANGE_PORT=30005
     depends_on:
       - dump1090
+
+  adsbexchange-mlat:
+    build: ./adsbexchange-mlat
+    restart: unless-stopped
+    ports:
+      - "30104:30104/tcp"
+    environment:
+      - MLAT_CLIENT_LATITUDE=XXXX
+      - MLAT_CLIENT_LONGITUDE=XXXX
+      - MLAT_CLIENT_ALTITUDE=XXXX
+      - MLAT_CLIENT_USER=XXXX
+    depends_on:
+      - dump1090

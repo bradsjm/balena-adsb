@@ -2,7 +2,7 @@ version: "2"
 services:
   dump1090:
     build: ./dump1090
-    restart: always
+    restart: unless-stopped
     command: "--device 00001000"
     ports:
       - "30002:30002/tcp"
@@ -15,10 +15,27 @@ services:
 
   flightradar24:
     build: ./flightradar24
-    restart: always
+    restart: unless-stopped
     environment:
       - "FR24FEED_KEY="
     ports:
       - "8754:8754/tcp"
+    depends_on:
+      - dump1090
+
+  modesmixer2:
+    build: ./modesmixer2
+    restart: unless-stopped
+    ports:
+      - "8081:8080/tcp"
+    command:
+      - '--inConnectId'
+      - 'dump1090:30005:DUMP1090'
+      - '--inConnectId'
+      - 'flightaware:30105:MLAT'
+      - '--location'
+      - 'XXXX:XXXX'
+      - '--google-key'
+      - 'XXXX'
     depends_on:
       - dump1090

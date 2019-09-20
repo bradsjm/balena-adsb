@@ -2,10 +2,10 @@ version: "2"
 services:
   netdata:
     image: netdata/netdata:latest-armhf
-    command: "-p 80"
     hostname: $HOSTNAME
-    pid: "host"
     privileged: true
+    ports:
+      - "80:19999/tcp"
     labels:
       io.balena.features.dbus: "1"
       io.balena.features.balena-socket: "1"

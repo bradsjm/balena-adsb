@@ -1,7 +1,7 @@
 version: "2"
 services:
   datadog:
-    image: achntrl/datadog-agent
+    build: ./datadog
     restart: unless-stopped
     privileged: true
     pid: host

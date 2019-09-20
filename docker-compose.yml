@@ -10,6 +10,7 @@ services:
       - DD_API_KEY=
       - DD_LOGS_ENABLED=true
       - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+      - DOCKER_HOST=unix:///var/run/balena.sock
       - DOCKER_SOCKET_PATH=/var/run/balena.sock
     labels:
       io.resin.features.dbus: 1

@@ -1,5 +1,15 @@
 version: "2"
 services:
+  datadog:
+    build: ./datadog
+    restart: unless-stopped
+    privileged: true
+    pid: host
+    network_mode: host
+    labels:
+      io.resin.features.dbus: 1
+      io.resin.features.balena-socket: 1
+
   dump1090:
     build: ./dump1090
     restart: unless-stopped

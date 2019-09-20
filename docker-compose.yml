@@ -7,8 +7,9 @@ services:
     pid: host
     network_mode: host
     environment:
-      - "DOCKER_SOCKET_PATH=/var/run/balena.sock"
-      - "DD_APM_ENABLED=false"
+      - DD_API_KEY=
+      - DD_APM_ENABLED=false
+      - DOCKER_SOCKET_PATH=/var/run/balena.sock
     labels:
       io.resin.features.dbus: 1
       io.resin.features.balena-socket: 1
@@ -90,7 +91,6 @@ services:
 
   adsbhub:
     build: ./adsbhub
-    container_name: "adsbhub"
     restart: unless-stopped
     depends_on:
       - dump1090
@@ -142,7 +142,7 @@ services:
       - "/dev/bus/usb"
     command: "-d 1"
     environment:
-      - MYCALL n0call
-      - IGLOGIN n0call -1
+      - MYCALL=n0call
+      - IGLOGIN=n0call -1
       - IGSERVER=noam.aprs2.net
       - FREQUENCY=144.39M

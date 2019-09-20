@@ -3,8 +3,8 @@ services:
   netdata:
     image: netdata/netdata:latest-armhf
     command: "-p 80"
+    hostname: $HOSTNAME
     pid: "host"
-    network_mode: "host"
     privileged: true
     labels:
       io.balena.features.dbus: "1"
@@ -135,3 +135,9 @@ services:
   direwolf:
     build: ./direwolf
     restart: unless-stopped
+    devices:
+      - "/dev/bus/usb"
+    command: "-d 1"
+    environment:
+      - IGSERVER=noam.aprs2.net
+      - FREQUENCY=144.39M

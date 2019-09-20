@@ -9,8 +9,9 @@ services:
     environment:
       - DD_API_KEY=
       - DD_APM_ENABLED=false
-      - DD_DISK_ENABLED=false
       - DOCKER_SOCKET_PATH=/var/run/balena.sock
+    volumes:
+      - "tmpfs:/host/proc/mounts:ro"
     labels:
       io.resin.features.dbus: 1
       io.resin.features.balena-socket: 1

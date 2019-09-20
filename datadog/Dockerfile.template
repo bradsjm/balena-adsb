@@ -8,7 +8,7 @@ RUN pip install -r requirements.txt
 ENV GOPATH=/usr/app
 ENV PATH=$PATH:/usr/app/bin
 
-RUN git clone --branch 6.8.3 --depth 1 https://github.com/DataDog/datadog-agent.git /usr/app/src/github.com/DataDog/datadog-agent
+RUN git clone --depth 1 https://github.com/DataDog/datadog-agent.git /usr/app/src/github.com/DataDog/datadog-agent
 
 WORKDIR /usr/app/src/github.com/DataDog/datadog-agent
 

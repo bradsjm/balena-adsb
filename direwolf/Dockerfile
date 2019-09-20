@@ -58,4 +58,5 @@ EXPOSE 8000 8001
 ADD sdr.conf /root/sdr.conf
 ADD start.sh /root/start.sh
 
-ENTRYPOINT [ "tini", "--", "/bin/sh", "/root/start.sh" ]
+ENTRYPOINT [ "tini", "--" ]
+CMD ["/bin/sh", "/root/start.sh"]

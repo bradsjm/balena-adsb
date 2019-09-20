@@ -34,9 +34,9 @@ services:
       - "--inConnectId"
       - "flightaware:30105:MLAT"
       - "--location"
-      - "XXXX:XXXX"
+      - "${LATITUDE}:${LONGITUDE}"
       - "--google-key"
-      - "XXXX"
+      - "${GOOGLE_KEY}"
     depends_on:
       - dump1090
 
@@ -46,9 +46,9 @@ services:
     ports:
       - "30053:30053/tcp"
     environment:
-      - PLANEFINDER_SHARECODE=XXXX
-      - PLANEFINDER_LATITUDE=XXXX
-      - PLANEFINDER_LONGITUDE=XXXX
+      - LATITUDE=
+      - LONGITUDE=
+      - PLANEFINDER_SHARECODE=
     depends_on:
       - dump1090
 
@@ -68,10 +68,10 @@ services:
     ports:
       - "30104:30104/tcp"
     environment:
-      - MLAT_CLIENT_LATITUDE=XXXX
-      - MLAT_CLIENT_LONGITUDE=XXXX
-      - MLAT_CLIENT_ALTITUDE=XXXX
-      - MLAT_CLIENT_USER=XXXX
+      - LATITUDE=
+      - LONGITUDE=
+      - ALTITUDE=
+      - MLAT_CLIENT_USER=
     depends_on:
       - dump1090
 
@@ -88,11 +88,11 @@ services:
     ports:
       - "30975:30005/tcp"
     environment:
-      - OPENSKY_LATITUDE=XXXX
-      - OPENSKY_LONGITUDE=XXXX
-      - OPENSKY_ALTITUDE=XXXX
-      - OPENSKY_USER=bXXXX
-      - OPENSKY_SERIAL=XXXX
+      - LATITUDE=
+      - LONGITUDE=
+      - ALTITUDE=
+      - OPENSKY_USER=
+      - OPENSKY_SERIAL=
       - DUMP1090_HOST=dump1090
       - DUMP1090_PORT=30005
     depends_on:
@@ -104,9 +104,9 @@ services:
     ports:
       - "30105:30105/tcp"
     environment:
-      - FLIGHTAWARE_USERNAME=XXXX
-      - FLIGHTAWARE_PASSWORD=XXXX
-      - FLIGHTAWARE_FEEDER_ID=XXXX
+      - FLIGHTAWARE_USERNAME=
+      - FLIGHTAWARE_PASSWORD=
+      - FLIGHTAWARE_FEEDER_ID=
       - FLIGHTAWARE_GPS_HOST=
     depends_on:
       - dump1090
@@ -118,7 +118,7 @@ services:
       - DUMP1090_HOST=dump1090
       - DUMP1090_PORT=30005
       - DUMP1090_PROTOCOL=beast
-      - RADARBOX24_KEY=XXXX
+      - RADARBOX24_KEY=
     depends_on:
       - dump1090
 
@@ -129,5 +129,7 @@ services:
       - "/dev/bus/usb"
     command: "-d 1"
     environment:
+      - MYCALL n0call
+      - IGLOGIN n0call -1
       - IGSERVER=noam.aprs2.net
       - FREQUENCY=144.39M

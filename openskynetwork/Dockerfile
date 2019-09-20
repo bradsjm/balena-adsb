@@ -33,6 +33,6 @@ ENV OPENSKY_LATITUDE= \
 
 EXPOSE 32088
 
-COPY openskynetwork-client.sh /
+COPY openskynetwork-client.sh /usr/local/bin/openskynetwork-client
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["/bin/sh", "openskynetwork-client.sh"]
+CMD ["openskynetwork-client"]

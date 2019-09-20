@@ -8,7 +8,7 @@ ENV FR24FEED_KEY=
 
 # Find the laest version @ http://repo.feed.flightradar24.com/ searching for "rpi_binaries/fr24feed_*_armhf.tgz"
 # With the changelog @ http://repo.feed.flightradar24.com/CHANGELOG.md
-RUN install_packages curl ca-certificates iputils-ping dnsutils
+RUN install_packages dumb-init curl ca-certificates iputils-ping dnsutils
 
 RUN curl -Ls --output fr24feed.tgz "http://repo.feed.flightradar24.com/rpi_binaries/fr24feed_${FR24FEED_VERSION}_armhf.tgz" && \
     tar -xvf fr24feed.tgz --strip-components=1 fr24feed_armhf/fr24feed && \
@@ -22,4 +22,5 @@ EXPOSE 8754/tcp
 
 HEALTHCHECK --start-period=1m --interval=30s --timeout=5s --retries=3 CMD curl --silent --fail --show-error -o /dev/null http://localhost:8754/ || exit 1
 
-CMD [ "sh", "-c", "/usr/bin/fr24feed", "--config-file=/etc/fr24feed.ini", "--fr24key=${FR24FEED_KEY}" ]
+ENTRYPOINT [ "dumb-init", "--" ]
+CMD [ "/bin/sh", "-c", "exec /usr/bin/fr24feed", "--config-file=/etc/fr24feed.ini", "--fr24key=${FR24FEED_KEY}" ]

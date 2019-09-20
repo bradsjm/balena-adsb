@@ -1,11 +1,14 @@
 version: "2"
 services:
   datadog:
-    build: ./datadog
+    image: achntrl/datadog-agent
     restart: unless-stopped
     privileged: true
     pid: host
     network_mode: host
+    environment:
+      - "DOCKER_SOCKET_PATH=/var/run/balena.sock"
+      - "DD_APM_ENABLED=false"
     labels:
       io.resin.features.dbus: 1
       io.resin.features.balena-socket: 1

@@ -6,8 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Install Balena CLI
-      run: npm install balena-cli -g
-    - name: Build the image
-      run: balena build --deviceType raspberrypi3 --arch armv7hf
+      - uses: actions/checkout@v1
+      - name: Install Balena CLI
+        run: npm install balena-cli --global-style
+      - name: Build the image
+        run: node_modules/.bin/balena build --deviceType raspberrypi3 --arch armv7hf

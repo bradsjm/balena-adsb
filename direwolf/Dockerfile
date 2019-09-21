@@ -50,11 +50,12 @@ COPY --from=build /etc/udev/rules.d/99-direwolf-cmedia.rules /etc/udev/rules.d/9
 ENV MYCALL n0call \
     IGSERVER noam.aprs2.net \
     IGLOGIN n0call -1 \
-    FREQUENCY 144.39M
+    FREQUENCY 144.39M \
+    DEVICE 1
 
 EXPOSE 8000 8001
 
-ADD sdr.conf /root/sdr.conf
+ADD sdr.conf /etc/sdr.conf
 ADD direwolf-runner.sh /usr/local/bin/direwolf-runner
 
 ENTRYPOINT [ "tini", "--" ]

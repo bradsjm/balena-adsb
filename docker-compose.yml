@@ -55,8 +55,8 @@ services:
     restart: unless-stopped
     devices:
       - "/dev/bus/usb"
-    command: "-d 1"
     environment:
+      - DEVICE=1
       - MYCALL=n0call
       - IGLOGIN=n0call -1
       - IGSERVER=noam.aprs2.net

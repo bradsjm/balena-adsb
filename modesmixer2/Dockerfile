@@ -11,4 +11,7 @@ EXPOSE 8080
 
 HEALTHCHECK --start-period=1m --interval=30s --timeout=5s --retries=3 CMD curl --silent --show-error -o /dev/null --fail http://localhost:8080/ || exit 1
 
-ENTRYPOINT ["dumb-init", "--", "/usr/local/bin/modesmixer2", "--web", "8080"]
+COPY modesmixer2-runner.sh /usr/local/bin/modesmixer2-runner
+
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["modesmixer2-runner"]

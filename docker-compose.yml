@@ -1,6 +1,7 @@
 version: "2"
 services:
   datadog:
+    image: bradsjm/datadog
     build: ./datadog
     restart: unless-stopped
     privileged: true
@@ -17,6 +18,7 @@ services:
       io.resin.features.balena-socket: 1
 
   dump1090:
+    image: bradsjm/dump1090
     build: ./dump1090
     restart: unless-stopped
     command: "--device 00001000"
@@ -30,6 +32,7 @@ services:
       - SYS_NICE
 
   flightradar24:
+    image: bradsjm/flightradar24
     build: ./flightradar24
     restart: unless-stopped
     environment:
@@ -40,6 +43,7 @@ services:
       - dump1090
 
   modesmixer2:
+    image: bradsjm/modesmixer2
     build: ./modesmixer2
     restart: unless-stopped
     ports:
@@ -57,6 +61,7 @@ services:
       - dump1090
 
   planefinder:
+    image: bradsjm/planefinder
     build: ./planefinder
     restart: unless-stopped
     ports:
@@ -69,6 +74,7 @@ services:
       - dump1090
 
   adsbexchange:
+    image: bradsjm/adsbexchange
     build: ./adsbexchange
     restart: unless-stopped
     environment:
@@ -79,6 +85,7 @@ services:
       - dump1090
 
   adsbexchange-mlat:
+    image: bradsjm/adsbexchange-mlat
     build: ./adsbexchange-mlat
     restart: unless-stopped
     ports:
@@ -92,12 +99,14 @@ services:
       - dump1090
 
   adsbhub:
+    image: bradsjm/adsbhub
     build: ./adsbhub
     restart: unless-stopped
     depends_on:
       - dump1090
 
   openskynetwork:
+    image: bradsjm/openskynetwork
     build: ./openskynetwork
     restart: unless-stopped
     ports:
@@ -114,6 +123,7 @@ services:
       - dump1090
 
   flightaware:
+    image: bradsjm/flightaware
     build: ./flightaware
     restart: unless-stopped
     ports:
@@ -127,6 +137,7 @@ services:
       - dump1090
 
   radarbox24:
+    image: bradsjm/radarbox24
     build: ./radarbox24
     restart: unless-stopped
     environment:
@@ -138,6 +149,7 @@ services:
       - dump1090
 
   direwolf:
+    image: bradsjm/direwolf
     build: ./direwolf
     restart: unless-stopped
     devices:

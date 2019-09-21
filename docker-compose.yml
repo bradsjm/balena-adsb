@@ -1,8 +1,8 @@
 version: "2"
 services:
   datadog:
-    image: bradsjm/datadog
-    build: ./datadog
+    image: bradsjm/balena-datadog
+    build: ./balena-datadog
     restart: unless-stopped
     privileged: true
     pid: host
@@ -47,7 +47,7 @@ services:
     build: ./modesmixer2
     restart: unless-stopped
     ports:
-      - "8081:8080/tcp"
+      - "8080:8080/tcp"
     command:
       - "--inConnectId"
       - "dump1090:30005:DUMP1090"

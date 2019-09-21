@@ -1,19 +1,11 @@
 # Base image to use
 ARG IMAGE=balenalib/raspberrypi3-debian
 
-FROM ${IMAGE}:run
+FROM ${IMAGE}:build as build
 
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-    dumb-init netbase dirmngr gnupg2 ca-certificates apt-transport-https && \
-    mkdir ~/.gnupg && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf && \
-    apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 1D043681 && \
-    echo 'deb https://apt.rb24.com/ rpi-stable main' > /etc/apt/sources.list.d/rb24.list && \
-    apt-get update -y && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends rbfeeder && \
-    apt-get purge -y dirmngr gnupg2 ca-certificates apt-transport-https libssl1.1 openssl && \
-    apt-get clean && \
-    rm -rf ~/.gnupg /var/lib/apt/lists/* /etc/apt/sources.list.d/rb24.list
+RUN bash -c "$(wget -O - http://apt.rb24.com/inst_rbfeeder.sh)"
+
+FROM ${IMAGE}:run
 
 ENV DUMP1090_HOST=dump1090
 ENV DUMP1090_PORT=30005
@@ -22,6 +14,10 @@ ENV RADARBOX24_KEY=
 
 EXPOSE 32088
 
+RUN install_packages dumb-init librtlsdr0 libcurl4-gnutls-dev libglib2.0-0
+COPY --from=build /usr/bin/rbfeeder /usr/bin/rbfeeder
+COPY --from=build /etc/rbfeeder.ini /etc/rbfeeder.ini
 COPY radarbox24-client.sh /usr/local/bin/radarbox24-client
+
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["radarbox24-client"]

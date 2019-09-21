@@ -9,7 +9,6 @@ ENV LANG=C.UTF-8 \
 
 RUN echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
     install_packages \
-    tini \
     rtl-sdr@testing \
     hamlib@testing \
     gpsd \
@@ -56,7 +55,7 @@ ENV MYCALL n0call \
 EXPOSE 8000 8001
 
 ADD sdr.conf /root/sdr.conf
-ADD start.sh /root/start.sh
+ADD direwolf-runner.sh /usr/local/bin/direwolf-runner
 
 ENTRYPOINT [ "tini", "--" ]
-CMD ["/bin/sh", "/root/start.sh"]
+CMD ["direwolf-runner"]

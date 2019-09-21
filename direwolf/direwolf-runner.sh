@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 cd /root
 
 # Update configuration using environment variables

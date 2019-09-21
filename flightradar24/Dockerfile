@@ -23,4 +23,4 @@ EXPOSE 8754/tcp
 HEALTHCHECK --start-period=1m --interval=30s --timeout=5s --retries=3 CMD curl --silent --fail --show-error -o /dev/null http://localhost:8754/ || exit 1
 
 ENTRYPOINT [ "dumb-init", "--" ]
-CMD [ "/bin/sh", "-c", "exec /usr/bin/fr24feed", "--config-file=/etc/fr24feed.ini", "--fr24key=${FR24FEED_KEY}" ]
+CMD [ "/bin/sh", "-c", "exec /usr/bin/fr24feed --config-file=/etc/fr24feed.ini --fr24key=${FR24FEED_KEY}" ]

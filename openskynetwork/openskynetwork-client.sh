@@ -1,5 +1,4 @@
 #!/bin/sh
-set -x
 echo "opensky-feeder openskyd/latitude string ${LATITUDE}" | debconf-set-selections
 echo "opensky-feeder openskyd/longitude string ${LONGITUDE}" | debconf-set-selections
 echo "opensky-feeder openskyd/altitude string ${ALTITUDE}" | debconf-set-selections

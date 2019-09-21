@@ -22,6 +22,6 @@ ENV RADARBOX24_KEY=
 
 EXPOSE 32088
 
-COPY radarbox24-client.sh /usr/local/bin/adarbox24-client
+COPY radarbox24-client.sh /usr/local/bin/radarbox24-client
 ENTRYPOINT ["dumb-init", "--"]
 CMD ["radarbox24-client"]

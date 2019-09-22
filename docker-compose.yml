@@ -110,6 +110,7 @@ services:
     environment:
       - DOCKER_HOST=unix:///var/run/balena.sock
       - GLANCES_OPT=-w
+      - TINI_SUBREAPER=1
     labels:
       io.resin.features.dbus: 1
       io.resin.features.balena-socket: 1

@@ -101,6 +101,19 @@ services:
     depends_on:
       - dump1090
 
+  glances:
+    image: bradsjm/glances
+    build: ./glances
+    privileged: true
+    pid: host
+    network_mode: host
+    environment:
+      - DOCKER_HOST=unix:///var/run/balena.sock
+      - GLANCES_OPT=-w
+    labels:
+      io.resin.features.dbus: 1
+      io.resin.features.balena-socket: 1
+
   modesmixer2:
     image: bradsjm/modesmixer2
     build: ./modesmixer2

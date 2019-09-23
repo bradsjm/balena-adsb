@@ -7,7 +7,8 @@ FROM ${IMAGE}:build as build
 ARG MLAT_CLIENT_VERSION=master
 
 RUN install_packages python3 git build-base curl ca-certificates python3-dev
-RUN pip3 install --upgrade shiv importlib-resources==0.8
+RUN pip3 install --no-cache --upgrade pip setuptools wheel && \
+    pip3 install --no-cache --upgrade shiv importlib-resources==0.8
 
 RUN curl -Ls --output mlat-client.tar.gz "https://github.com/mutability/mlat-client/archive/${MLAT_CLIENT_VERSION}.tar.gz"
 RUN shiv -c mlat-client -o /usr/local/bin/mlat-client /mlat-client.tar.gz

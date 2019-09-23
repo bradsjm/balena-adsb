@@ -3,6 +3,7 @@ services:
   adsbexchange:
     image: bradsjm/adsbexchange
     build: ./adsbexchange
+    read_only: true
     restart: unless-stopped
     environment:
       - DUMP1090_SERVER=dump1090
@@ -14,6 +15,7 @@ services:
   adsbexchange-mlat:
     image: bradsjm/adsbexchange-mlat
     build: ./adsbexchange-mlat
+    read_only: true
     restart: unless-stopped
     ports:
       - "30104:30104/tcp"
@@ -28,26 +30,27 @@ services:
   adsbhub:
     image: bradsjm/adsbhub
     build: ./adsbhub
+    read_only: true
     restart: unless-stopped
     depends_on:
       - dump1090
 
-  datadog:
-    image: bradsjm/balena-datadog
-    build: ./balena-datadog
-    restart: unless-stopped
-    privileged: true
-    pid: host
-    network_mode: host
-    environment:
-      - DD_API_KEY=
-      - DD_LOGS_ENABLED=true
-      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
-      - DOCKER_HOST=unix:///var/run/balena.sock
-      - DOCKER_SOCKET_PATH=/var/run/balena.sock
-    labels:
-      io.resin.features.dbus: 1
-      io.resin.features.balena-socket: 1
+  #  datadog:
+  #    image: bradsjm/balena-datadog
+  #    build: ./balena-datadog
+  #    restart: unless-stopped
+  #    privileged: true
+  #    pid: host
+  #    network_mode: host
+  #    environment:
+  #      - DD_API_KEY=
+  #      - DD_LOGS_ENABLED=true
+  #      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+  #      - DOCKER_HOST=unix:///var/run/balena.sock
+  #      - DOCKER_SOCKET_PATH=/var/run/balena.sock
+  #    labels:
+  #      io.resin.features.dbus: 1
+  #      io.resin.features.balena-socket: 1
 
   direwolf:
     image: bradsjm/direwolf
@@ -66,7 +69,8 @@ services:
     image: bradsjm/dump1090
     build: ./dump1090
     restart: unless-stopped
-    command: "--device 00001000"
+    environment:
+      - DEVICE=00001000
     ports:
       - "30002:30002/tcp"
       - "30003:30003/tcp"
@@ -107,10 +111,12 @@ services:
     privileged: true
     pid: host
     network_mode: host
+    tmpfs:
+      - /tmp:mode=1777
+      - /run:mode=1777
     environment:
       - DOCKER_HOST=unix:///var/run/balena.sock
       - GLANCES_OPT=-w
-      - TINI_SUBREAPER=1
     labels:
       io.resin.features.dbus: 1
       io.resin.features.balena-socket: 1

@@ -15,10 +15,12 @@ services:
   adsbexchange-mlat:
     image: bradsjm/adsbexchange-mlat
     build: ./adsbexchange-mlat
-    read_only: true
+    read_only: false
     restart: unless-stopped
     ports:
       - "30104:30104/tcp"
+    tmpfs:
+      - /tmp:rw,mode=1777
     environment:
       - LATITUDE=
       - LONGITUDE=
@@ -112,8 +114,8 @@ services:
     pid: host
     network_mode: host
     tmpfs:
-      - /tmp:mode=1777
-      - /run:mode=1777
+      - /tmp:rw,mode=1777
+      - /run:rw,mode=1777
     environment:
       - DOCKER_HOST=unix:///var/run/balena.sock
       - GLANCES_OPT=-w

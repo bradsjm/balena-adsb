@@ -1,6 +1,6 @@
 FROM balenalib/raspberrypi3-alpine
 
-RUN install_packages dumb-init python3 wireless-tools
+RUN install_packages dumb-init python3
 RUN apk add --no-cache --virtual .build_deps \
     gcc \
     musl-dev \
@@ -8,7 +8,7 @@ RUN apk add --no-cache --virtual .build_deps \
     python3-dev \
     && pip3 install --no-cache \
     influxdb>=1.0.0 \
-    glances[cpuinfo,docker,ip,web,wifi] \
+    glances[cpuinfo,docker,ip,web] \
     && apk del .build_deps
 
 # Define working directory.

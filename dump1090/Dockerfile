@@ -9,7 +9,7 @@ RUN echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repo
     echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
 
 RUN install_packages \
-    tini \
+    dumb-init \
     librtlsdr@testing \
     libusb \
     ncurses-libs
@@ -49,4 +49,4 @@ EXPOSE 30003/tcp
 EXPOSE 30005/tcp
 
 # Entrypoint
-ENTRYPOINT ["tini", "--", "nice", "-n", "-5", "dump1090", "--net", "--net-bind-address", "0.0.0.0", "--debug", "n", "--mlat", "--net-heartbeat", "5", "--quiet", "--stats-every", "60"]
+ENTRYPOINT ["dumb-init", "--", "nice", "-n", "-5", "dump1090", "--net", "--net-bind-address", "0.0.0.0", "--debug", "n", "--mlat", "--net-heartbeat", "5", "--quiet", "--stats-every", "60"]

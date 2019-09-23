@@ -4,9 +4,9 @@ ARG IMAGE=balenalib/raspberrypi3-alpine
 # Run Image
 FROM ${IMAGE}:run
 
-RUN install_packages socat iputils tini
+RUN install_packages socat iputils dumb-init
 
 COPY adsbexchange-client.sh /usr/local/bin/adsbexchange-client
 
-ENTRYPOINT ["tini", "--"]
+ENTRYPOINT ["dumb-init", "--"]
 CMD ["adsbexchange-client"]

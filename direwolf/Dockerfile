@@ -38,7 +38,7 @@ ENV LANG=C.UTF-8 \
 
 RUN echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
     install_packages \
-    tini \
+    dumb-init \
     rtl-sdr@testing \
     hamlib@testing \
     gpsd \
@@ -58,5 +58,5 @@ EXPOSE 8000 8001
 ADD sdr.conf /etc/sdr.conf
 ADD direwolf-runner.sh /usr/local/bin/direwolf-runner
 
-ENTRYPOINT [ "tini", "--" ]
+ENTRYPOINT [ "dumb-init", "--" ]
 CMD ["direwolf-runner"]

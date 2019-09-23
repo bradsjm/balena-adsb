@@ -14,7 +14,7 @@ RUN shiv -c mlat-client -o /usr/local/bin/mlat-client /mlat-client.tar.gz
 
 FROM ${IMAGE}:run
 
-RUN install_packages tini python3 && \
+RUN install_packages dumb-init python3 && \
     rm -rf /usr/share/terminfo
 
 COPY --from=build /usr/local/bin/mlat-client /usr/local/bin/mlat-client
@@ -22,5 +22,5 @@ COPY mlat-client-runner.sh /usr/local/bin/mlat-client-runner
 
 ENV SHIV_ROOT=/tmp
 EXPOSE 30104/tcp
-ENTRYPOINT ["tini", "--"]
+ENTRYPOINT ["dumb-init", "--"]
 CMD ["mlat-client-runner"]

@@ -53,7 +53,7 @@ ENV DEVICE="0" \
     LATITUDE=\
     LONGITUDE=\
     RECEIVER_OPTIONS="--gain -10 --ppm 0" \
-    DECODER_OPTIONS="--max-range 360 --quiet --stats-range --stats-every 60" \
+    DECODER_OPTIONS="--max-range 360 --quiet" \
     NET_OPTIONS="--net --net-heartbeat 60 --net-ro-size 1000 --net-ro-interval 1 --net-ri-port 0 --net-ro-port 30002 --net-sbs-port 30003 --net-bo-port 30005"
 
 # Entrypoint

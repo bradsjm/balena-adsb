@@ -26,4 +26,4 @@ EXPOSE 61208 61209
 
 # Define default command.
 ENTRYPOINT [ "dumb-init", "--" ]
-CMD python3 -m glances -C /glances/conf/glances.conf $GLANCES_OPT
+CMD ["/bin/sh", "-c", "exec python3 -m glances -C /glances/conf/glances.conf $GLANCES_OPT"]

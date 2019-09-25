@@ -22,6 +22,8 @@ services:
     tmpfs:
       - /tmp:rw,mode=1777
     environment:
+      - DUMP1090_SERVER=dump1090
+      - DUMP1090_PORT=30005
       - LATITUDE=
       - LONGITUDE=
       - ALTITUDE=
@@ -34,25 +36,11 @@ services:
     build: ./adsbhub
     read_only: true
     restart: unless-stopped
+    environment:
+      - DUMP1090_SERVER=dump1090
+      - DUMP1090_PORT=30005
     depends_on:
       - dump1090
-
-  #  datadog:
-  #    image: bradsjm/balena-datadog
-  #    build: ./balena-datadog
-  #    restart: unless-stopped
-  #    privileged: true
-  #    pid: host
-  #    network_mode: host
-  #    environment:
-  #      - DD_API_KEY=
-  #      - DD_LOGS_ENABLED=true
-  #      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
-  #      - DOCKER_HOST=unix:///var/run/balena.sock
-  #      - DOCKER_SOCKET_PATH=/var/run/balena.sock
-  #    labels:
-  #      io.resin.features.dbus: 1
-  #      io.resin.features.balena-socket: 1
 
   direwolf:
     image: bradsjm/direwolf
@@ -89,6 +77,8 @@ services:
     ports:
       - "30105:30105/tcp"
     environment:
+      - DUMP1090_SERVER=dump1090
+      - DUMP1090_PORT=30005
       - FLIGHTAWARE_USERNAME=
       - FLIGHTAWARE_PASSWORD=
       - FLIGHTAWARE_FEEDER_ID=
@@ -101,6 +91,8 @@ services:
     build: ./flightradar24
     restart: unless-stopped
     environment:
+      - DUMP1090_SERVER=dump1090
+      - DUMP1090_PORT=30005
       - FR24FEED_KEY=
     ports:
       - "8754:8754/tcp"

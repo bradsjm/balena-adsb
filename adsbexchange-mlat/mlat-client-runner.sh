@@ -1,10 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 
 set -o errexit          # Exit on most errors (see the manual)
-#set -o errtrace         # Make sure any error trap is inherited
 set -o nounset          # Disallow expansion of unset variables
-#set -o pipefail         # Use last non-zero exit code in a pipeline
-#set -o xtrace          # Trace the execution of the script (debug)
+
+echo -n "Connecting ${DUMP1090_SERVER} ${DUMP1090_PORT} .."
+while true; do
+  (</dev/tcp/${DUMP1090_SERVER}/${DUMP1090_PORT}) > /dev/null 2>&1
+  if [ "$?" -eq 0 ]; then
+    echo " succeeded"
+    break
+  else
+    echo -n "."
+    sleep 1
+  fi
+done
 
 echo "Connecting to ${DUMP1090_SERVER}:${DUMP1090_PORT} to send to feed.adsbexchange:31090"
 mlat-client --input-type 'dump1090' \

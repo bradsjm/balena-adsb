@@ -36,11 +36,10 @@ $ git push --set-upstream balena master
 ### Setup:
 You will need to add and configure environment variables in balenaCloud (or modify the docker-compose.yml) including:
 
-* DD_API_KEY (for optional use of Datadog monitoring)
-* FR24FEED_KEY (Flightradar 24 key)
+* ALTITUDE (your altitude)
 * LATITUDE (your latitude)
 * LONGITUDE (your longitude)
-* ALTITUDE (your altitude)
+* FR24FEED_KEY (Flightradar 24 key)
 * GOOGLE_KEY (optional google key for mapping)
 * MLAT_CLIENT_USER (adsb exchange MLAT user)
 * OPENSKY_USER (opensky username)

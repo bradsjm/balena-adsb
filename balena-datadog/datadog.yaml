@@ -1,3 +1,0 @@
-procfs_path: /proc
-container_cgroup_root: /sys/fs/cgroup
-container_proc_root: /proc

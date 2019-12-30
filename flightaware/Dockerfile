@@ -3,7 +3,7 @@ ARG IMAGE=balenalib/raspberrypi3-debian
 
 FROM ${IMAGE}:run
 
-ARG PIAWARE_VERSION=3.7.1
+ARG PIAWARE_VERSION=3.7.2
 
 ADD http://flightaware.com/adsb/piaware/files/packages/pool/piaware/p/piaware-support/piaware-repository_${PIAWARE_VERSION}_all.deb /
 
